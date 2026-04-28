@@ -42,4 +42,13 @@
   --text-caption2--line-height: 1.35;
   --text-caption2--font-weight: 400;
   --text-caption2--letter-spacing: -0.02em;
+
+  /* color */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --background-image-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.00) 87%, #000 100%);
+  --color-gray-900: #121212;
+  --color-gray-800: #424242;
+  --color-gray-700: #8C8787;
+  --color-gray-600: #C4C4C4;
 }
