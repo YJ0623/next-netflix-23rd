@@ -9,6 +9,7 @@ export default function Home() {
       <p className="text-label2">라벨2</p>
       <p className="text-caption1">캡션1</p>
       <p className="text-caption2">캡션2</p>
+      
     </div>
   );
 }
