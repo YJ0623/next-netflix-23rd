@@ -33,9 +33,10 @@ export default function HeroCarousel({ movies }: HeroCarouselProps) {
               src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.title}
               fill
-              sizes='100vw'
+              sizes="100vw"
               className="object-cover"
-              priority={index === 0} 
+              priority={index === 0}
+              loading='eager'
             />
             <div className="absolute inset-0 bg-linear-to-t from-black via-black/10 to-transparent" />
             <div className='absolute bottom-0.5 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-label2 font-bold z-10'>
