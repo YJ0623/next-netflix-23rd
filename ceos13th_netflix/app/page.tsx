@@ -8,7 +8,7 @@ export default function LandingPage() {
   const router = useRouter();
 
   return (
-    <main className="flex h-screen w-full items-center justify-center bg-black">
+    <main className="flex h-dvh w-full items-center justify-center bg-black">
       <Lottie
       loop={false}
       animationData={netflixAnimation}
