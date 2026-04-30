@@ -17,6 +17,8 @@ export default function LandingPage() {
           <img
             src="/logos_netflix-icon.svg"
             alt="Netflix Logo"
+            width={300}
+            height={300}
             className="w-[300px] h-[300px] transform cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
           />
         ) : (
