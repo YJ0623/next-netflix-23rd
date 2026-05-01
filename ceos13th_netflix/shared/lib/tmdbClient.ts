@@ -10,12 +10,14 @@ export async function tmdbFetch<T>(endpoint: string, options: FetchOptions = {})
     throw new Error('MOVIE_ACCESS_TOKEN이 설정되지 않았습니다.');
   }
 
+  // params를 분리하여 쿼리 문자열로 변환
   const { params, ...fetchOptions } = options;
   
   const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
   const url = `${BASE_URL}${endpoint}${queryString}`;
 
   const response = await fetch(url, {
+    // 기본 헤더와 함께 전달된 옵션을 병합(메서드 등)
     ...fetchOptions,
     headers: {
       accept: 'application/json',

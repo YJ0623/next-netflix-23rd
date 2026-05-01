@@ -17,14 +17,14 @@ export const movieApi = {
   // 인기 영화 목록
   getPopular: () =>
     tmdbFetch<MovieResponse>('/movie/popular', {
-      params: { language: 'ko-KR', page: '1' },
+      params: { language: 'en-US', page: '1' },
       next: { revalidate: 3600 },
     }),
 
   // 현재 상영 중인 영화 목록
   getNowPlaying: () =>
     tmdbFetch<MovieResponse>('/movie/now_playing', {
-      params: { language: 'ko-KR', page: '1' },
+      params: { language: 'en-US', page: '1' },
       cache: 'no-store',
     }),
 
