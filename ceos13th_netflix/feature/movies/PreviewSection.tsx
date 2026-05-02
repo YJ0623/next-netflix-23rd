@@ -2,19 +2,19 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
+import { Movie } from '@/feature/movies/services/movieApi';
 
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
+interface PreviewSectionProps {
+  movies: Movie[];
+}
 
-export default function PreviewSection({ movies }: { movies: Movie[] }) {
+export default function PreviewSection({ movies }: PreviewSectionProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDownRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
 
+  if (!movies || movies.length === 0) return null;
 
   return (
     <section className="mt-8">
