@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Lottie from "react-lottie-player";
+import Image from "next/image";
 import netflixAnimation from "@/public/lottie_netflix_logo.json";
+import icon from '@/public/icon_netflix_logo.svg';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -14,12 +16,12 @@ export default function LandingPage() {
     <main className="flex h-screen w-full items-center justify-center bg-black">
       <button type="button" onClick={() => setPlay(true)}>
         {!play ? (
-          <img
-            src="/logos_netflix-icon.svg"
+          <Image
+            src={icon}
             alt="Netflix Logo"
-            width={300}
-            height={300}
-            className="w-[300px] h-[300px] transform cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110"
+            className="transform cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 h-auto"
+            style={{ width: 300, height: 300 }}
+            loading="eager"
           />
         ) : (
           <Lottie
