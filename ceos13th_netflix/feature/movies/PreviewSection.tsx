@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
 
 type Movie = {
   id: number;
@@ -14,7 +15,6 @@ export default function PreviewSection({ movies }: { movies: Movie[] }) {
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
 
-  const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
   return (
     <section className="mt-8">
@@ -44,11 +44,13 @@ export default function PreviewSection({ movies }: { movies: Movie[] }) {
         }}
       >
         {movies.map((movie) => (
-          <img
+          <Image
             key={movie.id}
-            src={`${imageBaseUrl}${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title}
             draggable={false}
+            width={102}
+            height={102}
             className="h-[102px] w-[102px] shrink-0 rounded-full object-cover"
           />
         ))}
