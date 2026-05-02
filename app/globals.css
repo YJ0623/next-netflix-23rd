@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif;
+  
+  --text-heading1: 1.5rem;
+  --text-heading1--line-height: 1.35;
+  --text-heading1--font-weight: 600;
+  --text-heading1--letter-spacing: -0.02em;
+
+  --text-heading2: 1.25rem;
+  --text-heading2--line-height: 1.35;
+  --text-heading2--font-weight: 600;
+  --text-heading2--letter-spacing: -0.02em;
+
+  --text-body1: 1.125rem;
+  --text-body1--line-height: 1.35;
+  --text-body1--font-weight: 400;
+  --text-body1--letter-spacing: -0.02em;
+
+  --text-body2: 1rem;
+  --text-body2--line-height: 1.35;
+  --text-body2--font-weight: 400;
+  --text-body2--letter-spacing: -0.02em;
+
+  --text-label1: 1.25rem;
+  --text-label1--line-height: 1.35;
+  --text-label1--font-weight: 600;
+  --text-label1--letter-spacing: -0.02em;
+
+  --text-label2: 0.9375rem;;
+  --text-label2--line-height: 1.35;
+  --text-label2--font-weight: 400;
+  --text-label2--letter-spacing: -0.02em;
+
+  --text-caption1: 0.75rem;
+  --text-caption1--line-height: 1.35;
+  --text-caption1--font-weight: 400;
+  --text-caption1--letter-spacing: -0.02em;
+
+  --text-caption2: 0.625rem;
+  --text-caption2--line-height: 1.35;
+  --text-caption2--font-weight: 400;
+  --text-caption2--letter-spacing: -0.02em;
+
+  /* color */
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --background-image-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.00) 87%, #000 100%);
+  --color-gray-900: #121212;
+  --color-gray-800: #424242;
+  --color-gray-700: #8C8787;
+  --color-gray-600: #C4C4C4;
+}
+
+@utility scrollbar-hide {
+  /* Chrome, Safari, Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE, Edge */
+  -ms-overflow-style: none;
+}
