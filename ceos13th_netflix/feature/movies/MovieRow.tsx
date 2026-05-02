@@ -20,7 +20,7 @@ export default function MovieRow({ title, movies }: MovieRowProps) {
   
   return (
     <section className="mt-8 px-4">
-      <h2 className="mb-4 px-4 text-heading2 text-white">
+      <h2 className="mb-4 text-heading2 text-white">
         {title}
       </h2>
 
