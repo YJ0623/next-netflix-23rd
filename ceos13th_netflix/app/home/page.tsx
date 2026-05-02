@@ -1,39 +1,42 @@
-import Header from "@/components/Header";
-import HeroCarousel from "@/feature/movies/MovieHero";
-import PlayBar from "@/components/PlayBar";
-import { movieApi } from "@/feature/movies/services/movieApi";
-import MovieCard from "@/feature/movies/MovieCard";
-import MovieRow from "@/feature/movies/MovieCard";
+import Header from '@/components/Header';
+import HeroCarousel from '@/feature/movies/MovieHero';
+import PreviewSection from '@/feature/movies/PreviewSection';
+import { movieApi } from '@/feature/movies/services/movieApi';
+import MovieRow from '@/feature/movies/MovieRow';
+import { CATEGORIES } from '@/const/categories';
 
 export default async function Home() {
-    const top10KoreaData = await movieApi.getTop10KoreaToday();
-    const [popular] = await Promise.all([
-    movieApi.getPopular(),
-    // movieApi.getTrending(),
-    // movieApi.getNollywoodMovies(), // 이전에 만든 국가 필터 API
-    // movieApi.getNollywoodMovies(), // 아프리카 영화도 비슷하게 구성
-  ]);
+  const top10KoreaData = await movieApi.getTop10KoreaToday();
+  const nowPlayingData = await movieApi.getNowPlaying();
 
-    return (
-        <div className="flex flex-col items-center w-full h-dvh bg-black">
-            <div className="w-full h-auto px-4 pt-6 z-10 absolute">
-                <Header />
-            </div>
+  const categoryResults = await Promise.all(
+    CATEGORIES.map(async (category) => {
+      const data = await category.fetcher();
+      return {
+        id: category.id,
+        title: category.title,
+        movies: data.results, // 알맹이 데이터만 추출
+      };
+    })
+  );
 
-            <div className="w-full h-100">
-                <HeroCarousel movies={top10KoreaData.results} />
-            </div>
+  return (
+    <div className="flex w-full min-h-dvh justify-center bg-black">
+      <div className="w-full px-4 pt-6 z-10 absolute">
+        <Header />
+      </div>
 
-            <div className="w-full items-center justify-center flex mt-3">
-                <PlayBar />
-            </div>
-
-            {/* 여기에 프리뷰 섹션 */}
-
-            {/* 여기에 추천 섹션 */}
-            <div className="w-full">
-                <MovieRow title="Popular on Netflix" movies={popular.results} />
-            </div>
-        </div>
-    )
+      <div className="w-full bg-black">
+        <HeroCarousel movies={top10KoreaData.results} />
+        <PreviewSection movies={nowPlayingData.results} />
+        {categoryResults.map((category) => (
+          <MovieRow 
+            key={category.id} 
+            title={category.title} 
+            movies={category.movies} 
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

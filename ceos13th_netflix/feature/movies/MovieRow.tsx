@@ -1,24 +1,28 @@
 'use client';
-
 import { useRef } from 'react';
 import Image from 'next/image';
 import { Movie } from '@/feature/movies/services/movieApi';
 
-interface PreviewSectionProps {
+interface MovieRowProps {
+  title: string;
   movies: Movie[];
 }
 
-export default function PreviewSection({ movies }: PreviewSectionProps) {
+export default function MovieRow({ title, movies }: MovieRowProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDownRef = useRef(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
 
-  if (!movies || movies.length === 0) return null;
+  const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 
+  if (!movies || movies.length === 0) return null;
+  
   return (
     <section className="mt-8 px-4">
-      <h2 className="mb-4 px-4 text-2xl font-semibold text-white">Previews</h2>
+      <h2 className="mb-4 px-4 text-heading2 text-white">
+        {title}
+      </h2>
 
       <div
         ref={scrollRef}
@@ -44,15 +48,16 @@ export default function PreviewSection({ movies }: PreviewSectionProps) {
         }}
       >
         {movies.map((movie) => (
-          <Image
-            key={movie.id}
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            draggable={false}
-            width={102}
-            height={102}
-            className="h-[102px] w-[102px] shrink-0 rounded-full object-cover"
-          />
+          <div key={movie.id} className="w-[103px] shrink-0">
+            <Image
+              src={`${imageBaseUrl}${movie.poster_path}`}
+              alt={movie.title || '영화 포스터'}
+              draggable={false}
+              width={177}
+              height={177}
+              className="h-[177px] w-[103px] shrink-0 object-cover"
+            />
+          </div>
         ))}
       </div>
     </section>
