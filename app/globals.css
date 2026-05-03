@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/PretendardVariable.woff2') format('woff2');
+}
+
 @theme {
-  --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif;
-  
+  --font-sans: 'Pretendard', ui-sans-serif, system-ui;
+
   --text-heading1: 1.5rem;
   --text-heading1--line-height: 1.35;
   --text-heading1--font-weight: 600;

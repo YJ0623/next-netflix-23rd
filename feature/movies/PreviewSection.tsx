@@ -18,7 +18,7 @@ export default function PreviewSection({ movies }: PreviewSectionProps) {
 
   return (
     <section className="mt-8 px-4">
-      <h2 className="mb-4 px-4 text-2xl font-semibold text-white">Previews</h2>
+      <h2 className="mb-4 text-2xl font-semibold text-white">Previews</h2>
 
       <div
         ref={scrollRef}
