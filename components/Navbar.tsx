@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
@@ -56,7 +57,10 @@ export default function NavBar() {
 
           return (
             <li key={item.label}>
-              <button className="flex flex-col items-center gap-1">
+              <Link
+                href={item.path}
+                className="flex flex-col items-center gap-1"
+              >
                 <Image
                   src={currentIcon}
                   alt={`${item.label} icon`}
@@ -71,7 +75,7 @@ export default function NavBar() {
                 >
                   {item.label}
                 </span>
-              </button>
+              </Link>
             </li>
           );
         })}
