@@ -3,6 +3,7 @@ import { tmdbFetch } from '@/shared/lib/tmdbClient';
 
 export interface Movie {
   id: number;
+  name?: string;
   title: string;
   poster_path: string;
   backdrop_path: string;
@@ -37,6 +38,7 @@ export const movieApi = {
   },
 
   getTrending: () => tmdbFetch<MovieResponse>('/trending/all/week'),
+  
   getNewReleases: () => tmdbFetch<MovieResponse>('/movie/now_playing'),
 
   getTop10NigeriaToday: async () => {
@@ -45,6 +47,7 @@ export const movieApi = {
     });
     return { ...data, results: data.results.slice(0, 10) };
   },
+
   getAfricanMovies: () =>
     tmdbFetch<MovieResponse>('/discover/movie', {
       params: {
@@ -52,6 +55,7 @@ export const movieApi = {
         sort_by: 'popularity.desc',
       },
     }),
+
   getNollywood: () =>
     tmdbFetch<MovieResponse>('/discover/movie', {
       params: { with_origin_country: 'NG', sort_by: 'popularity.desc' },
@@ -78,4 +82,13 @@ export const movieApi = {
     tmdbFetch<MovieResponse>('/movie/top_rated', { params: { page: '1' } }),
   getWatchItAgain: () =>
     tmdbFetch<MovieResponse>('/movie/popular', { params: { page: '3' } }),
+
+  searchMovies: (query: string) => 
+    tmdbFetch<MovieResponse>('/search/movie', { 
+      params: { 
+        query, 
+        language: 'ko-KR',
+        include_adult: 'false', // 이거 true로 하면 큰일남 
+      } 
+    }),
 };
