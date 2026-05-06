@@ -3,6 +3,7 @@ import { tmdbFetch } from '@/shared/lib/tmdbClient';
 
 export interface Movie {
   id: number;
+  name?: string;
   title: string;
   poster_path: string;
   backdrop_path: string;
@@ -81,4 +82,13 @@ export const movieApi = {
     tmdbFetch<MovieResponse>('/movie/top_rated', { params: { page: '1' } }),
   getWatchItAgain: () =>
     tmdbFetch<MovieResponse>('/movie/popular', { params: { page: '3' } }),
+
+  searchMovies: (query: string) => 
+    tmdbFetch<MovieResponse>('/search/movie', { 
+      params: { 
+        query, 
+        language: 'ko-KR',
+        include_adult: 'false', // 이거 true로 하면 큰일남 
+      } 
+    }),
 };
