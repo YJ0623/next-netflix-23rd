@@ -37,6 +37,7 @@ export const movieApi = {
   },
 
   getTrending: () => tmdbFetch<MovieResponse>('/trending/all/week'),
+  
   getNewReleases: () => tmdbFetch<MovieResponse>('/movie/now_playing'),
 
   getTop10NigeriaToday: async () => {
@@ -45,6 +46,7 @@ export const movieApi = {
     });
     return { ...data, results: data.results.slice(0, 10) };
   },
+
   getAfricanMovies: () =>
     tmdbFetch<MovieResponse>('/discover/movie', {
       params: {
@@ -52,6 +54,7 @@ export const movieApi = {
         sort_by: 'popularity.desc',
       },
     }),
+
   getNollywood: () =>
     tmdbFetch<MovieResponse>('/discover/movie', {
       params: { with_origin_country: 'NG', sort_by: 'popularity.desc' },

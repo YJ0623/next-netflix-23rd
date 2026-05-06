@@ -48,14 +48,14 @@ export default function MovieRow({ title, movies }: MovieRowProps) {
         }}
       >
         {movies.map((movie) => (
-          <div key={movie.id} className="w-[103px] shrink-0">
+          <div key={movie.id} className="shrink-0">
             <Image
               src={`${imageBaseUrl}${movie.poster_path}`}
               alt={movie.title || '영화 포스터'}
               draggable={false}
-              width={177}
+              width={103}
               height={177}
-              className="h-[177px] w-[103px] shrink-0 object-cover"
+              className="w-auto h-auto shrink-0 object-cover"
             />
           </div>
         ))}
