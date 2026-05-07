@@ -5,9 +5,19 @@ export interface Movie {
   id: number;
   name?: string;
   title: string;
-  poster_path: string;
-  backdrop_path: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
   overview: string;
+}
+
+export interface MovieDetail extends Movie {
+  release_date: string;
+  vote_average: number;
+  runtime: number;
+  genres: {
+    id: number;
+    name: string;
+  }[];
 }
 
 export interface MovieResponse {
@@ -40,7 +50,7 @@ export const movieApi = {
   },
 
   getTrending: () => tmdbFetch<MovieResponse>('/trending/all/week'),
-  
+
   getNewReleases: () => tmdbFetch<MovieResponse>('/movie/now_playing'),
 
   getTop10NigeriaToday: async () => {
@@ -85,13 +95,21 @@ export const movieApi = {
   getWatchItAgain: () =>
     tmdbFetch<MovieResponse>('/movie/popular', { params: { page: '3' } }),
 
-  searchMovies: (query: string, page = 1) => 
-    tmdbFetch<MovieResponse>('/search/movie', { 
-      params: { 
-        query, 
+  searchMovies: (query: string, page = 1) =>
+    tmdbFetch<MovieResponse>('/search/movie', {
+      params: {
+        query,
         language: 'ko-KR',
         include_adult: 'false', // 이거 true로 하면 큰일남
-        page: String(page), 
-      }, 
+        page: String(page),
+      },
+    }),
+
+  //영화 상세내용
+  getMovieDetail: (movieId: number) =>
+    tmdbFetch<MovieDetail>(`/movie/${movieId}`, {
+      params: {
+        language: 'ko-KR',
+      },
     }),
 };

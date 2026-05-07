@@ -1,4 +1,5 @@
 import ReactQueryProvider from './ReactQueryProvider';
+import { MovieModalProvider } from '@/feature/movies/MovieModalProvider';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="min-h-full flex flex-col">
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <MovieModalProvider>{children}</MovieModalProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

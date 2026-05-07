@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { useMovieSearch } from './useMovieSearch';
+import { useMovieModal } from './MovieModalProvider';
 
 export default function MovieSearchList({ query }: { query: string }) {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+  const { openMovieModal } = useMovieModal();
   const { ref, inView } = useInView({
     rootMargin: '200px',
   });
@@ -54,9 +56,11 @@ export default function MovieSearchList({ query }: { query: string }) {
       )}
 
       {results.map((item) => (
-        <div
+        <button
           key={item.id}
-          className="flex flex-row w-full h-[76px] bg-gray-800 text-white my-0.5"
+          type="button"
+          onClick={() => openMovieModal(item.id)}
+          className="flex flex-row w-full h-[76px] bg-gray-800 text-white my-0.5 cursor-pointer"
         >
           {/* 포스터 이미지 */}
           <div className="relative w-[146px] h-[76px] shrink-0 bg-gray-900">
@@ -73,7 +77,7 @@ export default function MovieSearchList({ query }: { query: string }) {
           <div className="flex w-full h-full items-center ml-4.5 pr-4">
             {item.title}
           </div>
-        </div>
+        </button>
       ))}
 
       <div ref={ref} className="h-10" />
