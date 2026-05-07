@@ -25,12 +25,15 @@ export default function MovieDetailModal({
 
   if (error || !data) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 text-white">
-        상세 정보를 불러오지 못했습니다.
+      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/70 text-white">
+        <div className="mb-5 text-center text-gray-300">
+          상세 정보를 불러오지 못했습니다.
+        </div>
+
         <button
           type="button"
           onClick={onClose}
-          className="rounded bg-gray-500 gap-5 text-white"
+          className="rounded bg-gray-600 px-5 py-2 text-sm text-white"
         >
           닫기
         </button>

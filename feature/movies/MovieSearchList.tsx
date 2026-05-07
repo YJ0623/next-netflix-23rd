@@ -34,15 +34,14 @@ export default function MovieSearchList({ query }: { query: string }) {
 
   if (error) {
     return (
-      <div className="text-red-500 text-center mt-10">
+      <div className="text-red-500 text-center mt-5">
         검색 결과를 불러오지 못했습니다.
       </div>
     );
   }
 
   if (isLoading) {
-    // 스켈레톤 ui 대신 우선 테스트용!
-    return <div className="text-gray-500 text-center mt-10">검색 중...</div>;
+    return <div className="text-gray-500 text-center mt-5">검색 중...</div>;
   }
 
   return (
@@ -50,7 +49,7 @@ export default function MovieSearchList({ query }: { query: string }) {
       <div className="text-heading1 text-white ml-4 my-3.5">Top Searches</div>
 
       {results.length === 0 && (
-        <div className="text-gray-500 text-center mt-10">
+        <div className="text-gray-500 text-center mt-5">
           검색 결과가 없습니다.
         </div>
       )}
@@ -83,12 +82,12 @@ export default function MovieSearchList({ query }: { query: string }) {
       <div ref={ref} className="h-10" />
 
       {isFetchingNextPage && (
-        <div className="text-gray-500 text-center mt-10">더 불러오는 중...</div>
+        <div className="text-gray-500 text-center mt-5">더 불러오는 중...</div>
       )}
 
       {/* 마지막 페이지 도달 시 안내 문구 */}
       {!hasNextPage && results.length > 0 && (
-        <div className="text-gray-500 text-center mt-10">
+        <div className="text-gray-500 text-center mt-5">
           모든 검색 결과를 불러왔습니다.
         </div>
       )}
