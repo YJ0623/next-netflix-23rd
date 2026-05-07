@@ -15,7 +15,7 @@ export default async function SearchPage({
         <SearchBar />
       </div>
 
-      <div className="flex flex-col overflow-y-auto pb-20">
+      <div className="flex-1 overflow-y-auto pb-20">
         <MovieSearchRow query={query} />
       </div>
     </div>

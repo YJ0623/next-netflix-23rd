@@ -1,10 +1,15 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { useMovieSearch } from './useMovieSearch';
 
 export default function MovieSearchList({ query }: { query: string }) {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+  const { ref, inView } = useInView({
+    rootMargin: '200px',
+  });
 
   const {
     data,
@@ -15,9 +20,15 @@ export default function MovieSearchList({ query }: { query: string }) {
     error,
   } = useMovieSearch(query);
 
-  if (!query) return null;
-
   const results = data?.pages.flatMap((page) => page.results) ?? [];
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (!query) return null;
 
   if (error) {
     return (
@@ -35,7 +46,7 @@ export default function MovieSearchList({ query }: { query: string }) {
   return (
     <>
       <div className="text-heading1 text-white ml-4 my-3.5">Top Searches</div>
-      
+
       {results.length === 0 && (
         <div className="text-gray-500 text-center mt-10">
           검색 결과가 없습니다.
@@ -65,15 +76,17 @@ export default function MovieSearchList({ query }: { query: string }) {
         </div>
       ))}
 
-      {hasNextPage && (
-        <button
-          type="button"
-          onClick={() => fetchNextPage()}
-          disabled={isFetchingNextPage}
-          className="w-full py-4 text-gray-500"
-        >
-          {isFetchingNextPage ? '더 불러오는 중...' : '더 보기'}
-        </button>
+      <div ref={ref} className="h-10" />
+
+      {isFetchingNextPage && (
+        <div className="text-gray-500 text-center mt-10">더 불러오는 중...</div>
+      )}
+
+      {/* 마지막 페이지 도달 시 안내 문구 */}
+      {!hasNextPage && results.length > 0 && (
+        <div className="text-gray-500 text-center mt-10">
+          모든 검색 결과를 불러왔습니다.
+        </div>
       )}
     </>
   );
