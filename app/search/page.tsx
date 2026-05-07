@@ -11,7 +11,9 @@ export default async function SearchPage({
 
   return (
     <div className="flex flex-col w-full h-dvh bg-black pt-11">
-      <SearchBar />
+      <div className="shrink-0">
+        <SearchBar />
+      </div>
 
       <div className="flex flex-col overflow-y-auto pb-20">
         <MovieSearchRow query={query} />

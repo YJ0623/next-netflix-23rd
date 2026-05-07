@@ -11,7 +11,9 @@ export interface Movie {
 }
 
 export interface MovieResponse {
+  page: number;
   results: Movie[];
+  total_pages: number;
 }
 
 export const movieApi = {
@@ -83,12 +85,13 @@ export const movieApi = {
   getWatchItAgain: () =>
     tmdbFetch<MovieResponse>('/movie/popular', { params: { page: '3' } }),
 
-  searchMovies: (query: string) => 
+  searchMovies: (query: string, page = 1) => 
     tmdbFetch<MovieResponse>('/search/movie', { 
       params: { 
         query, 
         language: 'ko-KR',
-        include_adult: 'false', // 이거 true로 하면 큰일남 
-      } 
+        include_adult: 'false', // 이거 true로 하면 큰일남
+        page: String(page), 
+      }, 
     }),
 };
