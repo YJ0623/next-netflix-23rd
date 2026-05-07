@@ -2,9 +2,8 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import searchIcon from '@/public/icon_search.svg';
-import closeIcon from '@/public/icon_close2.svg';
+import SearchIcon from '@/public/icon_search.svg';
+import CloseIcon from '@/public/icon_close2.svg';
 
 export default function SearchBar() {
   const router = useRouter();
@@ -29,13 +28,7 @@ export default function SearchBar() {
 
   return (
     <div className="flex flex-row items-center justify-center w-full h-13 bg-gray-800">
-      <Image
-        src={searchIcon}
-        alt="search icon"
-        width={20}
-        height={20}
-        className="mr-2 ml-4"
-      />
+      <SearchIcon className="mr-2 ml-4 w-5 h-5" />
       <input
         type="text"
         value={term}
@@ -49,13 +42,7 @@ export default function SearchBar() {
         className="mr-4 ml-auto"
         style={{ visibility: term ? 'visible' : 'hidden' }}
       >
-        <Image
-          src={closeIcon}
-          alt="close icon"
-          width={16}
-          height={16}
-          loading="eager"
-        />
+        <CloseIcon className="w-4 h-4" />
       </button>
     </div>
   );
