@@ -1,26 +1,15 @@
 import Header from '@/components/Header';
-import HeroCarousel from '@/feature/movies/MovieHero';
-import PreviewSection from '@/feature/movies/PreviewSection';
-import { movieApi } from '@/feature/movies/services/movieApi';
-import MovieRow from '@/feature/movies/MovieRow';
-import { CATEGORIES } from '@/const/categories';
+import PreviewSection from '@/feature/movies/components/PreviewSection/PreviewSection';
+import MovieRowWrapper from '@/feature/movies/components/MovieRow/MovieRowWrapper';
 import NavBar from '@/components/Navbar';
+import HeroSkeleton from '@/feature/movies/components/MovieHero/Skeleton';
+import { Suspense } from 'react';
+import PreviewSkeleton from '@/feature/movies/components/PreviewSection/Skeleton';
+import MovieRowSkeleton from '@/feature/movies/components/MovieRow/Skeleton';
+import HeroWrapper from '@/feature/movies/components/MovieHero/HeroWrapper';
+import PreviewWrapper from '@/feature/movies/components/PreviewSection/PreviewWrapper';
 
 export default async function Home() {
-  const top10KoreaData = await movieApi.getTop10KoreaToday();
-  const nowPlayingData = await movieApi.getNowPlaying();
-
-  const categoryResults = await Promise.all(
-    CATEGORIES.map(async (category) => {
-      const data = await category.fetcher();
-      return {
-        id: category.id,
-        title: category.title,
-        movies: data.results,
-      };
-    })
-  );
-
   return (
     <div className="flex w-full min-h-dvh justify-center bg-black pb-20">
       <div className="w-full px-4 pt-6 z-10 absolute">
@@ -28,15 +17,17 @@ export default async function Home() {
       </div>
 
       <div className="w-full bg-black">
-        <HeroCarousel movies={top10KoreaData.results} />
-        <PreviewSection movies={nowPlayingData.results} />
-        {categoryResults.map((category) => (
-          <MovieRow 
-            key={category.id} 
-            title={category.title} 
-            movies={category.movies} 
-          />
-        ))}
+        <Suspense fallback={<HeroSkeleton />}>
+          <HeroWrapper />
+        </Suspense>
+
+        <Suspense fallback={<PreviewSkeleton />}>
+          <PreviewWrapper />
+        </Suspense>
+
+        <Suspense fallback={<MovieRowSkeleton />}>
+          <MovieRowWrapper />
+        </Suspense>
       </div>
 
       <NavBar />
