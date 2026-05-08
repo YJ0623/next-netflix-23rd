@@ -1,5 +1,6 @@
 import SearchBar from '@/components/SearchBar';
 import MovieSearchRow from '@/feature/movies/MovieSearchRow';
+import NavBar from '@/components/Navbar';
 
 export default async function SearchPage({
   searchParams,
@@ -11,11 +12,15 @@ export default async function SearchPage({
 
   return (
     <div className="flex flex-col w-full h-dvh bg-black pt-11">
-      <SearchBar />
+      <div className="shrink-0">
+        <SearchBar />
+      </div>
 
-      <div className="flex flex-col overflow-y-auto pb-20">
+      <div className="flex-1 overflow-y-auto scrollbar-hide pb-20">
         <MovieSearchRow query={query} />
       </div>
+
+      <NavBar />
     </div>
   );
 }
