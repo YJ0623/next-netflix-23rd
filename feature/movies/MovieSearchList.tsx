@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
 import { useMovieSearch } from './useMovieSearch';
 import { useMovieModal } from './MovieModalProvider';
+import PlayCircleIcon from '@/public/icon_play_circle.svg';
 
 export default function MovieSearchList({ query }: { query: string }) {
   const imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
@@ -75,6 +76,9 @@ export default function MovieSearchList({ query }: { query: string }) {
 
           <div className="flex w-full h-full items-center ml-4.5 pr-4">
             {item.title}
+            <div className='ml-auto'>
+              <PlayCircleIcon/>
+            </div>
           </div>
         </button>
       ))}

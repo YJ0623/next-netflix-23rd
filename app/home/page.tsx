@@ -8,6 +8,7 @@ import PreviewSkeleton from '@/feature/movies/components/PreviewSection/Skeleton
 import MovieRowSkeleton from '@/feature/movies/components/MovieRow/Skeleton';
 import HeroWrapper from '@/feature/movies/components/MovieHero/HeroWrapper';
 import PreviewWrapper from '@/feature/movies/components/PreviewSection/PreviewWrapper';
+import PlayBar from '@/components/PlayBar';
 
 export default async function Home() {
   return (
@@ -20,6 +21,10 @@ export default async function Home() {
         <Suspense fallback={<HeroSkeleton />}>
           <HeroWrapper />
         </Suspense>
+
+        <div className="flex w-full justify-center">
+          <PlayBar />
+        </div>
 
         <Suspense fallback={<PreviewSkeleton />}>
           <PreviewWrapper />
