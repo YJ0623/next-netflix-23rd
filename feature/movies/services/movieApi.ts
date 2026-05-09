@@ -26,6 +26,8 @@ export interface MovieResponse {
   total_pages: number;
 }
 
+export type MediaType = 'movie';
+
 export const movieApi = {
   // 인기 영화 목록
   getPopular: () =>
@@ -108,6 +110,13 @@ export const movieApi = {
   //영화 상세내용
   getMovieDetail: (movieId: number) =>
     tmdbFetch<MovieDetail>(`/movie/${movieId}`, {
+      params: {
+        language: 'ko-KR',
+      },
+    }),
+
+  getDetail: (mediaType: MediaType, id: number) =>
+    tmdbFetch<MovieDetail>(`/${mediaType}/${id}`, {
       params: {
         language: 'ko-KR',
       },
